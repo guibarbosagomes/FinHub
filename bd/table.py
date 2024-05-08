@@ -7,10 +7,9 @@ usuario = Table(
     "usuario",
     meta_obj,
     Column("id", Integer, primary_key = True, autoincrement = True),
-    Column("cod_empresa", String(30), nullable = False ),
-    Column("nome", String(30), nullable = False ),
-    Column("usuario", Text, nullable = False),
-    Column("email", String(30), nullable = False),
+    Column("nome_completo", String(30), nullable = False ),
+    Column("nome_usuario", String(50), nullable = False ),
+    Column("email", String(50), nullable = False),
     Column("senha", Text, nullable = False),
     Column("dt_cadastro", DateTime, nullable = False )
 )

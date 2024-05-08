@@ -1,4 +1,5 @@
 import streamlit as st
+from bd.select import check_login
 
 if st.button("Voltar"):
     st.switch_page("main.py")
@@ -6,13 +7,21 @@ if st.button("Voltar"):
 st.write("Login")
 
 with st.form("login", clear_on_submit = True):
-    usuario = st.text_input("usuario", placeholder = "Informe seu usuário")
-    senha = st.text_input("senha", placeholder = "Informe sua senha")
+    usuario = st.text_input("Usuário", placeholder = "Informe seu usuário")
+    senha = st.text_input("Senha", placeholder = "Informe sua senha")
 
     logar = st.form_submit_button("Logar", use_container_width=True)
 
     if logar:
-        st.session_state["user_id"] = usuario
+        if usuario and senha:
+            if check_login(usuario, senha):
+                st.session_state["usuario"] = usuario
+                st.switch_page("pages/main2.py")
+
+            else:
+                st.warning("Usuário ou senha incorretos.")
+        else:
+            st.warning("Existem campos em branco !")
         
     
     st.markdown("[Recuperar senha ?](%s)" % "https://localhost")

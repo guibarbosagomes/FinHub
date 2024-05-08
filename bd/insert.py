@@ -1,10 +1,9 @@
 #%%
-
 import bcrypt
-
 from sqlalchemy import insert
-from table import usuario, empresa
-from connect import engine
+from bd.table import usuario, empresa
+from bd.connect import engine
+
 
 from datetime import datetime
 
@@ -23,11 +22,11 @@ def check_password(password, hashed_password):
 
 
 #%%
-def insert_usuario(cod_empresa, nome, usuario, senha, rsenha, email):
+def insert_usuario(nome_completo, nome_usuario, senha, email):
 
-    stmt = insert(usuario).values(cod_empresa = cod_empresa, 
-                            nome = nome,
-                            usuario = usuario,
+    stmt = insert(usuario).values(
+                            nome_completo = nome_completo,
+                            nome_usuario = nome_usuario,
                             senha = hash_password(senha),
                             email = email,
                             dt_cadastro = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

@@ -3,4 +3,4 @@ import streamlit as st
 def app():
     st.title("Home")
 
-    st.write("Bem vindo, ")
+    st.write(f"Bem vindo,", st.session_state["usuario"])

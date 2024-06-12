@@ -1,5 +1,7 @@
 import streamlit as st
 
 
-st.title("Fornecedores")
+def app():
+    st.title("Fornecedores")
 
+    st.write(f"Bem vindo,", st.session_state["usuario"])

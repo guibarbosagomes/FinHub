@@ -1,3 +1,6 @@
 __pycache__
 .env
 Documentações e Matriz
+*.xlsx
+*.csv
+*.xlsb

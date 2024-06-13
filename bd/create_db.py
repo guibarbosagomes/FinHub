@@ -1,5 +1,7 @@
+# Scripts para inicializar tabelas no banco
+# Para rodar o script remova o arquivo select da pasta bd
 #%%
-from connect import engine
+from connect_local import engine
 from table import usuario, empresa, meta_obj
 
 

@@ -28,6 +28,10 @@ def check_email(email):
         return True
     else:
         return False
+
+def busca_senha():
+
+    
         
 #%%
 def check_login(nome_usuario, senha):

@@ -23,6 +23,10 @@ with st.form("login", clear_on_submit = True):
         else:
             st.warning("Existem campos em branco !")
         
-    
-    st.markdown("[Recuperar senha ?](%s)" % "https://localhost")
+    msg = """
+        <div style="text-align: center;">
+            <a href="http://localhost:8501/recuperar_senha" target="_blank"> Recuperar senha ?</a>
+        </div>
+    """
+    st.markdown(msg, unsafe_allow_html=True)
 

@@ -3,7 +3,7 @@ import bcrypt
 from sqlalchemy import insert
 from bd.table import usuario, empresa
 from bd.connect import engine
-
+from envio_email.enviar_email import enviar_email_registro
 
 from datetime import datetime
 
@@ -22,10 +22,11 @@ def check_password(password, hashed_password):
 
 
 #%%
-def insert_usuario(nome_completo, nome_usuario, senha, email):
+def insert_usuario(nome_completo, dt_nascimento, nome_usuario, senha, email):
 
     stmt = insert(usuario).values(
                             nome_completo = nome_completo,
+                            dt_nascimento = dt_nascimento,
                             nome_usuario = nome_usuario,
                             senha = hash_password(senha),
                             email = email,
@@ -35,6 +36,8 @@ def insert_usuario(nome_completo, nome_usuario, senha, email):
     with engine.connect() as conn:
         conn.execute(stmt)
         conn.commit()
+        ## Envio de email apos inclusão no banco
+        enviar_email_registro(email, nome_completo, dt_nascimento, nome_usuario, email, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         
     return True
 

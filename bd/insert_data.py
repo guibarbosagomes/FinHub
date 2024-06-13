@@ -1,7 +1,11 @@
 #%%
+#%%
+import random
+import string
+
 import bcrypt
 from sqlalchemy import insert
-from bd.table import usuario, empresa
+from bd.table import usuario, empresa, recuperacao_senha
 from bd.connect import engine
 from envio_email.enviar_email import enviar_email_registro
 
@@ -55,4 +59,36 @@ def insert_empresa(cod_empresa, desc_empresa):
         conn.commit()
         
     return True
+
+
+def generate_random_code(length=5):
+    ## Função que gera informações randomicas do codigo secreto
+
+    # Definir os caracteres possíveis (números e letras maiúsculas e minúsculas)
+    characters = string.ascii_letters + string.digits
+    # Gerar um código aleatório de 6 dígitos
+    random_code = ''.join(random.choices(characters, k=length))
+    return random_code
+
+
+
+def insert_recuperar_senha(id_usuario):
+    # Cria uma linha na tabela de recuperação de senha e gera um codigo secreto que vai ser enviado por email na solicitação
+    codigo_secreto = generate_random_code()
+
+    stmt = insert(recuperacao_senha).values(id_usuario = id_usuario,
+                                            cod_secreto = codigo_secreto,
+                                            status = True,
+                                            dt_solicitacao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            )
+    
+    with engine.connect() as conn:
+        conn.execute(stmt)
+        conn.commit()
+
+        return codigo_secreto
+    
+    return False
+
+
 # %%

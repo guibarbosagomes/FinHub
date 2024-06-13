@@ -1,6 +1,6 @@
 import streamlit as st
-from bd.insert import insert_usuario
-from bd.select import check_email
+from bd.insert_data import insert_usuario
+from bd.select_data import check_email
 from envio_email.enviar_email import enviar_email_registro
 from datetime import datetime
 
@@ -38,7 +38,7 @@ with st.form("registrar", clear_on_submit = False):
                                 <div style="text-align: center;">
                                 Usuário cadastrado com sucesso.</br>
                                 Seus dados foram enviados por email.</br>
-                                Clique em <b>Voltar</b> para acessar.
+                                Clique em <a href="main">Voltar</a> para acessar.
                                 </br>
                                 </br>
                                 </div>

@@ -9,7 +9,7 @@ opcao = st.selectbox("Selecione uma opção", ["Acessar", "Registrar"], index = 
 print(opcao)
 
 if opcao == "Acessar":
-    st.switch_page("logi.py")
+    st.switch_page("pages/login.py")
 
 elif opcao == "Registrar":
     show_pages(
